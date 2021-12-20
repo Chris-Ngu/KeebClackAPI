@@ -17,6 +17,7 @@ namespace KeebClack.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options=>options.EnableEndpointRouting = false);
+           // services.AddDbContext<KeyboardDbContext>();
 
         }
 
