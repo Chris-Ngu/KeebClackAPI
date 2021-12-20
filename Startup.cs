@@ -18,9 +18,12 @@ namespace KeebClack.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddDbContext<KeyboardDbContext>(opts =>
-                 opts.UseInMemoryDatabase("KeyboardDB"));
-            services.AddScoped<KeyboardDbContext>();
+            services.AddDbContext<UserDbContext>();
+            services.AddScoped<UserDbContext>();
+            
+            //services.AddDbContext<KeyboardDbContext>(opts =>
+          //     opts.UseInMemoryDatabase("KeyboardDB"));
+          //services.AddScoped<KeyboardDbContext>();
 
             services.AddControllers();
 

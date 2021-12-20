@@ -1,9 +1,9 @@
 ﻿// Reference: https://chathuranga94.medium.com/connect-database-to-asp-net-core-web-api-63a53e8da1ca
-
+/*
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading.Tasks
 using Microsoft.EntityFrameworkCore;
 
 namespace KeebClack.API.models
@@ -29,3 +29,4 @@ namespace KeebClack.API.models
         }
     }
 }
+*/
