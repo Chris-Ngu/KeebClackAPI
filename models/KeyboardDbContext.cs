@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityMappingCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace KeebClack.API.models
 {
@@ -23,9 +23,9 @@ namespace KeebClack.API.models
         }
 
 
-        public List<Keyboard> getKeyboards ()
+        public List<Keyboard> getKeyboards()
         {
-            return Keyboards.Local.toList<Keyboard>()
+            return Keyboards.Local.toList<Keyboard>();
         }
     }
 }
