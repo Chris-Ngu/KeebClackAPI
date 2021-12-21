@@ -27,5 +27,11 @@ namespace KeebClack.API.models
         {
             return this._keyboards.Local.ToList();
         }
+
+        // returns one keyboard that matches id param
+        public Keyboard GetOneKeyboard(int id)
+        {
+            return this._keyboards.Local.SingleOrDefault<Keyboard>(x => x.Id == id);
+        }
     }
 }

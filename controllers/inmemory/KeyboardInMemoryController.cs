@@ -26,5 +26,12 @@ namespace KeebClack.API.controllers
             List<Keyboard> keyboards = this._context.GetAllKeyboards();
             return Ok(keyboards);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetOneKeyboard(int id)
+        {
+            Keyboard keyboard = this._context.GetOneKeyboard(id);
+            return Ok(keyboard);
+        }
     }
 }
