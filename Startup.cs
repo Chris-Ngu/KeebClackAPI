@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.EntityFrameworkCore;
 using KeebClack.API.models;
 
 namespace KeebClack.API
@@ -18,8 +20,13 @@ namespace KeebClack.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddDbContext<KeyboardDbContext>(opts =>
-                 opts.UseInMemoryDatabase("KeyboardDB"));
+
+            // In memory database stuff for UserDbContext
+            services.AddDbContext<UserDbContext>(options=>options.UseInMemoryDatabase("UserDB"));
+            services.AddScoped<UserDbContext>();
+
+            // In memory database stuff for KeyboardDbContext
+            services.AddDbContext<KeyboardDbContext>(options => options.UseInMemoryDatabase("KeyboardDB"));
             services.AddScoped<KeyboardDbContext>();
 
             services.AddControllers();
@@ -27,7 +34,7 @@ namespace KeebClack.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        // local: update env in IDE
+        // *NOTE* local: update env in IDE
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,16 +48,6 @@ namespace KeebClack.API
 
             app.UseRouting();
             app.UseMvc();
-
-            /*
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
-            */
         }
     }
 }

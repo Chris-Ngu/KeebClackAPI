@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "963a2fa7-d311-4915-b67b-b70e956ebbfd": {
+      "ProjectGuid": "963a2fa7-d311-4915-b67b-b70e956ebbfd",
+      "DisplayName": "KeebClack.API",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
