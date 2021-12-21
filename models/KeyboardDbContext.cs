@@ -1,32 +1,31 @@
-﻿// Reference: https://chathuranga94.medium.com/connect-database-to-asp-net-core-web-api-63a53e8da1ca
-/*
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeebClack.API.models
 {
     public class KeyboardDbContext : DbContext
     {
-        public DbSet<Keyboard> Keyboards { get; set; }
+        DbSet<Keyboard> _keyboards { get; set; }
 
-        public KeyboardDbContext(DbContextOptions<KeyboardDbContext> context) : base(options)
+        // called when instance is created
+        public KeyboardDbContext(DbContextOptions options) : base(options)
         {
+            // populating in memory with some base users
             GenerateInitialKeyboards();
         }
 
         private void GenerateInitialKeyboards()
         {
-            Keyboards.Add(new Keyboard { Id = 1, BoardName = "KreeseBoard", Switch = "brown", Keycaps = "OEM", Value = 129, DateAdded = new DateTime() });
+            _keyboards.Add(new Keyboard { BoardName = "TestBoard1", DateAdded = new DateTime(), Id = 1, Keycaps = "OEM", Switch = "Cherry", Value = 219 });
+            _keyboards.Add(new Keyboard { BoardName = "TestBoard2", DateAdded = new DateTime(), Id = 2, Keycaps = "OEM2", Switch = "Cherry2", Value = 2190 });
         }
 
-
-        public List<Keyboard> getKeyboards()
+        // GetAllKeyboards service to retrieve all users "locally"
+        public List<Keyboard> GetAllKeyboards()
         {
-            return Keyboards.Local.toList<Keyboard>();
+            return this._keyboards.Local.ToList();
         }
     }
 }
-*/

@@ -1,23 +1,33 @@
-﻿using System;
+﻿// Reference: https://chathuranga94.medium.com/connect-database-to-asp-net-core-web-api-63a53e8da1ca
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeebClack.API.models
 {
     public class UserDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> _User { get; set; }
 
+        // called when instance is created
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
+            // populating in memory with some base users
             GenerateInitialTestUsers();
         }
 
         private void GenerateInitialTestUsers()
         {
-            Users.Add(new User { Email = "someTestEmail@gmail.com", Username = "TestUser", Password = "testPassword", DateJoined = new DateTime() });
+            this._User.Add(new User { Email = "someTestEmail@gmail.com", Username = "TestUser", Password = "testPassword", DateJoined = new DateTime() });
         }
 
-      //public List<User> getUsers()
-        //]eturn Users; }
+        // getUser service to retrieve all users "locally"
+        public List<User> getUsers()
+        {
+            return this._User.Local.ToList();
+        }
+      
     }
 }
