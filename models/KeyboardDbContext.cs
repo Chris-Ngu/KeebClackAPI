@@ -22,10 +22,29 @@ namespace KeebClack.API.models
             _keyboards.Add(new Keyboard { BoardName = "TestBoard2", DateAdded = new DateTime(), Id = 2, Keycaps = "OEM2", Switch = "Cherry2", Value = 2190 });
         }
 
-        // GetAllKeyboards service to retrieve all users "locally"
+        // GetAllKeyboards service to retrieve all users
         public List<Keyboard> GetAllKeyboards()
         {
-            return this._keyboards.Local.ToList();
+            // upon start up, using local will show all items, not using local will show nothing until local is updated
+            //return this._keyboards.Local.ToList();
+            //return this._keyboards.ToList();
+
+            return this._keyboards.ToList();
+        }
+
+        // returns one keyboard that matches id param
+        public Keyboard GetOneKeyboard(int id)
+        {
+            return this._keyboards.SingleOrDefault<Keyboard>(x => x.Id == id);
+        }
+
+        public Keyboard CreateNewKeyboard(Keyboard keyboard)
+        {
+            keyboard.DateAdded = DateTime.UtcNow;
+            this._keyboards.Add(keyboard);
+            this.SaveChanges();
+
+            return keyboard;
         }
     }
 }

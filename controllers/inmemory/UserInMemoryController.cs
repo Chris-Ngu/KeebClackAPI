@@ -27,5 +27,19 @@ namespace KeebClack.API.controllers
             List<User> users = this._context.getUsers();
             return Ok(users);
         }
+
+        // localhost:57573/api/userinmemory/{email}
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetOneUser(string email)
+        { 
+            User user = this._context.GetUser(email);
+            return Ok(user);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddUser(User user)
+        {
+            return Ok(this._context.AddUser(user));
+        }
     }
 }

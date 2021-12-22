@@ -20,13 +20,28 @@ namespace KeebClack.API.models
 
         private void GenerateInitialTestUsers()
         {
-            this._User.Add(new User { Email = "someTestEmail@gmail.com", Username = "TestUser", Password = "testPassword", DateJoined = new DateTime() });
+            this._User.Add(new User { Email = "test1@gmail.com", Username = "TestUserOne", Password = "testPassword", DateJoined = new DateTime() });
+            this._User.Add(new User { Email = "test2@gmail.com", Username = "TestUserTwo", Password = "testPassword", DateJoined = new DateTime() });
         }
 
         // getUser service to retrieve all users "locally"
         public List<User> getUsers()
         {
-            return this._User.Local.ToList();
+            return this._User.ToList();
+            //return this._User.Local.ToList();
+        }
+
+        public User GetUser(string email)
+        {
+            // returns null if DNE (because of Single instead of SingleOrDefault
+            return this._User.SingleOrDefault<User>(x => x.Email == email);
+        }
+
+        public User AddUser(User user)
+        {
+            user.DateJoined = DateTime.UtcNow;
+            this._User.Add(user);
+            return user;
         }
       
     }
