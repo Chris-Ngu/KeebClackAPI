@@ -35,5 +35,11 @@ namespace KeebClack.API.controllers
             User user = this._context.GetUser(email);
             return Ok(user);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddUser(User user)
+        {
+            return Ok(this._context.AddUser(user));
+        }
     }
 }

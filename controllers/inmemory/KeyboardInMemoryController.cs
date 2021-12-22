@@ -33,5 +33,11 @@ namespace KeebClack.API.controllers
             Keyboard keyboard = this._context.GetOneKeyboard(id);
             return Ok(keyboard);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> createKeyboard(Keyboard keyboard)
+        {
+            return Ok(this._context.CreateNewKeyboard(keyboard)); 
+        }
     }
 }

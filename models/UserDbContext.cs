@@ -27,13 +27,21 @@ namespace KeebClack.API.models
         // getUser service to retrieve all users "locally"
         public List<User> getUsers()
         {
-            return this._User.Local.ToList();
+            return this._User.ToList();
+            //return this._User.Local.ToList();
         }
 
         public User GetUser(string email)
         {
             // returns null if DNE (because of Single instead of SingleOrDefault
-            return this._User.Local.SingleOrDefault<User>(x => x.Email == email);
+            return this._User.SingleOrDefault<User>(x => x.Email == email);
+        }
+
+        public User AddUser(User user)
+        {
+            user.DateJoined = DateTime.UtcNow;
+            this._User.Add(user);
+            return user;
         }
       
     }
