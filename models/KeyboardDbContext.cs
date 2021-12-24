@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +15,8 @@ namespace KeebClack.API.models
         public KeyboardDbContext(DbContextOptions options) : base(options)
         {
             // populating in memory with some base users
-            GenerateInitialKeyboards();
+            // This if or in memory databases, do not run this on a db instance
+            //GenerateInitialKeyboards();
         }
 
         private void GenerateInitialKeyboards()
@@ -48,3 +51,4 @@ namespace KeebClack.API.models
         }
     }
 }
+*/
