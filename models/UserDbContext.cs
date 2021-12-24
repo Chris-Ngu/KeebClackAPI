@@ -15,7 +15,9 @@ namespace KeebClack.API.models
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
             // populating in memory with some base users
-            GenerateInitialTestUsers();
+            // This is for in memory database testing
+            // Do not run this on a db instance
+            //GenerateInitialTestUsers();
         }
 
         private void GenerateInitialTestUsers()
