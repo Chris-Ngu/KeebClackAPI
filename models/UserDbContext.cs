@@ -45,7 +45,22 @@ namespace KeebClack.API.models
         {
             user.DateJoined = DateTime.UtcNow;
             this._User.Add(user);
+            this.SaveChanges();
             return user;
+        }
+
+        public bool DeleteUser(string email)
+        {
+            try
+            {
+                this._User.Remove(this._User.Single(x => x.Email == email));
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
       
     }

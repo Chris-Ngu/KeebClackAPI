@@ -28,5 +28,19 @@ namespace KeebClack.API.controllers
         {
             return Ok(this._context.GetUser(email));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewUser(User user)
+        { 
+            return Ok(this._context.AddUser(user));
+        }
+
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteUser(string email)
+        {
+            bool status = this._context.DeleteUser(email);
+            if (status) return Ok();
+            else return BadRequest();
+        }
     }
 }
