@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KeebClack.API.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(KeyboardDbContext))]
+    partial class KeyboardDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,23 +22,32 @@ namespace KeebClack.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("KeebClack.API.models.User", b =>
+            modelBuilder.Entity("KeebClack.API.models.Keyboard", b =>
                 {
-                    b.Property<string>("Email")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BoardName")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("DateJoined")
+                    b.Property<DateTime>("DateAdded")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Keycaps")
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("Switch")
                         .HasColumnType("text");
 
-                    b.HasKey("Email");
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
 
-                    b.ToTable("_User");
+                    b.HasKey("Id");
+
+                    b.ToTable("_keyboards");
                 });
 #pragma warning restore 612, 618
         }

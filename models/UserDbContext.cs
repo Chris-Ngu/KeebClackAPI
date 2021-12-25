@@ -24,11 +24,13 @@ namespace KeebClack.API.models
         {
             this._User.Add(new User { Email = "test1@gmail.com", Username = "TestUserOne", Password = "testPassword", DateJoined = new DateTime() });
             this._User.Add(new User { Email = "test2@gmail.com", Username = "TestUserTwo", Password = "testPassword", DateJoined = new DateTime() });
+            this.SaveChanges();
         }
 
         // getUser service to retrieve all users "locally"
         public List<User> getUsers()
         {
+
             return this._User.ToList();
             //return this._User.Local.ToList();
         }

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace KeebClack.API.Migrations
+namespace KeebClack.API.Migrations.UserDb
 {
-    public partial class InitialCreate : Migration
+    public partial class Second : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
