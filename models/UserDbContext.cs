@@ -24,11 +24,13 @@ namespace KeebClack.API.models
         {
             this._User.Add(new User { Email = "test1@gmail.com", Username = "TestUserOne", Password = "testPassword", DateJoined = new DateTime() });
             this._User.Add(new User { Email = "test2@gmail.com", Username = "TestUserTwo", Password = "testPassword", DateJoined = new DateTime() });
+            this.SaveChanges();
         }
 
         // getUser service to retrieve all users "locally"
         public List<User> getUsers()
         {
+
             return this._User.ToList();
             //return this._User.Local.ToList();
         }
@@ -43,7 +45,22 @@ namespace KeebClack.API.models
         {
             user.DateJoined = DateTime.UtcNow;
             this._User.Add(user);
+            this.SaveChanges();
             return user;
+        }
+
+        public bool DeleteUser(string email)
+        {
+            try
+            {
+                this._User.Remove(this._User.Single(x => x.Email == email));
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
       
     }

@@ -1,24 +1,18 @@
-﻿/*
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using KeebClack.API.models;
-
 
 namespace KeebClack.API.controllers
 {
-    [Route("api/userinmemory")]
+    [Route("api/user")]
     [ApiController]
-    public class UserInMemoryController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly ILogger<UserInMemoryController> _logger;
         private readonly UserDbContext _context;
-
-        public UserInMemoryController(ILogger<UserInMemoryController> logger, UserDbContext context)
+        public UserController(UserDbContext context)
         {
-            this._logger = logger;
             this._context = context;
         }
 
@@ -29,19 +23,24 @@ namespace KeebClack.API.controllers
             return Ok(users);
         }
 
-        // localhost:57573/api/userinmemory/{email}
         [HttpGet("{email}")]
         public async Task<IActionResult> GetOneUser(string email)
-        { 
-            User user = this._context.GetUser(email);
-            return Ok(user);
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> AddUser(User user)
         {
+            return Ok(this._context.GetUser(email));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewUser(User user)
+        { 
             return Ok(this._context.AddUser(user));
+        }
+
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteUser(string email)
+        {
+            bool status = this._context.DeleteUser(email);
+            if (status) return Ok();
+            else return BadRequest();
         }
     }
 }
-*/

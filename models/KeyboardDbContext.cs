@@ -1,6 +1,4 @@
-﻿/*
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -51,4 +49,3 @@ namespace KeebClack.API.models
         }
     }
 }
-*/
