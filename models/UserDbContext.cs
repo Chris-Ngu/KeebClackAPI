@@ -17,7 +17,7 @@ namespace KeebClack.API.models
             // populating in memory with some base users
             // This is for in memory database testing
             // Do not run this on a db instance
-            //GenerateInitialTestUsers();
+           // GenerateInitialTestUsers();
         }
 
         private void GenerateInitialTestUsers()
@@ -62,6 +62,8 @@ namespace KeebClack.API.models
                 return false;
             }
         }
+
+        // need update function here
       
     }
 }
