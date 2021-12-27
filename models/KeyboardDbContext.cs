@@ -14,7 +14,7 @@ namespace KeebClack.API.models
         {
             // populating in memory with some base users
             // This if or in memory databases, do not run this on a db instance
-            GenerateInitialKeyboards();
+            //GenerateInitialKeyboards();
         }
 
         private void GenerateInitialKeyboards()
