@@ -11,13 +11,19 @@ namespace KeebClack.API.models
     {
         public DbSet<User> _User { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                .HasIndex(x => x.Email).IsUnique();
+        }
+
         // called when instance is created
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
             // populating in memory with some base users
             // This is for in memory database testing
             // Do not run this on a db instance
-            //GenerateInitialTestUsers();
+           // GenerateInitialTestUsers();
         }
 
         private void GenerateInitialTestUsers()
@@ -62,6 +68,8 @@ namespace KeebClack.API.models
                 return false;
             }
         }
+
+        // need update function here
       
     }
 }

@@ -19,8 +19,9 @@ namespace KeebClack.API.models
 
         private void GenerateInitialKeyboards()
         {
-            _keyboards.Add(new Keyboard { BoardName = "TestBoard1", DateAdded = new DateTime(), Id = 1, Keycaps = "OEM", Switch = "Cherry", Value = 219 });
-            _keyboards.Add(new Keyboard { BoardName = "TestBoard2", DateAdded = new DateTime(), Id = 2, Keycaps = "OEM2", Switch = "Cherry2", Value = 2190 });
+            this._keyboards.Add(new Keyboard { BoardName = "TestBoard1", DateAdded = new DateTime(), Id = 1, Keycaps = "OEM", Switch = "Cherry", Value = 219 });
+            this._keyboards.Add(new Keyboard { BoardName = "TestBoard2", DateAdded = new DateTime(), Id = 2, Keycaps = "OEM2", Switch = "Cherry2", Value = 2190 });
+            this.SaveChanges();
         }
 
         // GetAllKeyboards service to retrieve all users
@@ -46,6 +47,20 @@ namespace KeebClack.API.models
             this.SaveChanges();
 
             return keyboard;
+        }
+
+        public bool DeleteKeyboard(int id)
+        {
+            try
+            {
+                this._keyboards.Remove(this._keyboards.Single(x => x.Id == id));
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
