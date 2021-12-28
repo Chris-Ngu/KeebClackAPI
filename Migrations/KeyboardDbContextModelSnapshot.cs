@@ -31,23 +31,75 @@ namespace KeebClack.API.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BoardName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Keycaps")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Switch")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("UserForeignKey")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Value")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserForeignKey");
+
                     b.ToTable("_keyboards");
+                });
+
+            modelBuilder.Entity("KeebClack.API.models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateJoined")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("KeebClack.API.models.Keyboard", b =>
+                {
+                    b.HasOne("KeebClack.API.models.User", "user")
+                        .WithMany("Keyboards")
+                        .HasForeignKey("UserForeignKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("KeebClack.API.models.User", b =>
+                {
+                    b.Navigation("Keyboards");
                 });
 #pragma warning restore 612, 618
         }

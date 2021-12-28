@@ -3,17 +3,19 @@ using System;
 using KeebClack.API.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace KeebClack.API.Migrations.UserDb
+namespace KeebClack.API.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(KeyboardDbContext))]
+    [Migration("20211228213020_ForeignKey")]
+    partial class ForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,8 @@ namespace KeebClack.API.Migrations.UserDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserForeignKey")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("UserForeignKey")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Value")
                         .HasColumnType("integer");
@@ -56,16 +57,23 @@ namespace KeebClack.API.Migrations.UserDb
 
                     b.HasIndex("UserForeignKey");
 
-                    b.ToTable("Keyboard");
+                    b.ToTable("_keyboards");
                 });
 
             modelBuilder.Entity("KeebClack.API.models.User", b =>
                 {
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateJoined")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -75,9 +83,9 @@ namespace KeebClack.API.Migrations.UserDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
 
-                    b.ToTable("_User");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("KeebClack.API.models.Keyboard", b =>

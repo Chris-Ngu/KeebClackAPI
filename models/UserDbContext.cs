@@ -11,6 +11,12 @@ namespace KeebClack.API.models
     {
         public DbSet<User> _User { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                .HasIndex(x => x.Email).IsUnique();
+        }
+
         // called when instance is created
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {

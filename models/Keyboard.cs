@@ -13,7 +13,7 @@ namespace KeebClack.API.models
 
         [ForeignKey("UserForeignKey")]
         [Required]
-        public User user { get; set; }
+        public User User { get; set; }
 
         [Required]
         public string BoardName { get; set; }
