@@ -27,8 +27,7 @@ namespace KeebClack.API
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             // postgresql
-            services.AddDbContext<UserDbContext>(options => options.UseNpgsql(this.configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<KeyboardDbContext>(options => options.UseNpgsql(this.configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(this.configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

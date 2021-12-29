@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KeebClack.API.Migrations
 {
-    [DbContext(typeof(KeyboardDbContext))]
-    partial class KeyboardDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DatabaseContext))]
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -55,7 +55,7 @@ namespace KeebClack.API.Migrations
 
                     b.HasIndex("UserForeignKey");
 
-                    b.ToTable("_keyboards");
+                    b.ToTable("Keyboards");
                 });
 
             modelBuilder.Entity("KeebClack.API.models.User", b =>
@@ -83,18 +83,21 @@ namespace KeebClack.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("KeebClack.API.models.Keyboard", b =>
                 {
-                    b.HasOne("KeebClack.API.models.User", "user")
+                    b.HasOne("KeebClack.API.models.User", "User")
                         .WithMany("Keyboards")
                         .HasForeignKey("UserForeignKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("KeebClack.API.models.User", b =>

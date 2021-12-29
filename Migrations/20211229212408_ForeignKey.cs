@@ -11,7 +11,7 @@ namespace KeebClack.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "_User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -23,11 +23,11 @@ namespace KeebClack.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "_keyboards",
+                name: "Keyboards",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -41,28 +41,34 @@ namespace KeebClack.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__keyboards", x => x.Id);
+                    table.PrimaryKey("PK_Keyboards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK__keyboards_User_UserForeignKey",
+                        name: "FK_Keyboards_Users_UserForeignKey",
                         column: x => x.UserForeignKey,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX__keyboards_UserForeignKey",
-                table: "_keyboards",
+                name: "IX_Keyboards_UserForeignKey",
+                table: "Keyboards",
                 column: "UserForeignKey");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "_keyboards");
+                name: "Keyboards");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

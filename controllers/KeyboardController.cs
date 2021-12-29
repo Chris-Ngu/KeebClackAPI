@@ -9,8 +9,8 @@ namespace KeebClack.API.controllers
     [ApiController]
     public class KeyboardController : ControllerBase
     {
-        private readonly KeyboardDbContext _context;
-        public KeyboardController(KeyboardDbContext context)
+        private readonly DatabaseContext _context;
+        public KeyboardController(DatabaseContext context)
         {
             this._context = context;
         }
