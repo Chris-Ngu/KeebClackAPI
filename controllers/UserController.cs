@@ -10,8 +10,8 @@ namespace KeebClack.API.controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserDbContext _context;
-        public UserController(UserDbContext context)
+        private readonly DatabaseContext _context;
+        public UserController(DatabaseContext context)
         {
             this._context = context;
         }
